@@ -29,20 +29,20 @@ public class UserService implements IUserService {
 
         boolean isUpdate = user.getId() != null;
 
-        if(user == null && userRepository.existsByUsername(dto.userName))
+        if(user.getId() == null && userRepository.existsByUsername(dto.userName))
         {
             throw new CustomException.ConflictException("UserName already  existing !");
         }
 
-        if(!user.getRole().equals(Role.ADMIN) && dto.role.equals(Role.ADMIN)) {
-            throw new CustomException.BadRequestException("You can register with admin role !");
-        }
+//        if(Role.valueOf(dto.roleType).equals(Role.ADMIN)) {
+//            throw new CustomException.BadRequestException("You can register with admin role !");
+//        }
 
         user.setUsername(dto.userName);
-//        user.setPassword(HashPasswordUtil.hash(dto.password));
+        user.setPassword(HashPasswordUtil.hash(dto.password));
         user.setFullName(dto.fullName);
         user.setAddress(dto.address);
-        user.setRole(dto.role);
+        user.setRole(Role.valueOf(dto.roleType.toUpperCase()));
 
         user = userRepository.save(user);
 

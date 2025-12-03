@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class UserDto {
 
-     public UUID id = null;
+    public UUID id = null;
 
     public String userName;
 
@@ -16,5 +16,5 @@ public class UserDto {
 
     public String address;
 
-    public Role role;
+    public String roleType;
 }
