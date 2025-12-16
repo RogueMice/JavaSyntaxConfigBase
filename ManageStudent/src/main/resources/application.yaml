@@ -10,5 +10,5 @@ spring:
       ddl-auto: update
     show-sql: true
 jwt:
-  secret: "serectKeytoLongqweqwqwrqwr2214124qdasdasfassagvxzvxvafasfasfasgagreqwe"
+  secret: "serectKeytoLongqweqwqwrqwr2214124qdasdasfassagvxzvxvafasfasfasgagreqwe4152125125qwfasvassvqwwrqwe"
   expirationMs: 3600000  #1 hour

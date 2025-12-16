@@ -1,11 +1,10 @@
-package com.Server.ManageStudent.repository.entity;
+package com.Server.ManageStudent.entity;
 
-import com.Server.ManageStudent.repository.entity.roleDefine.Role;
+import com.Server.ManageStudent.entity.roleDefine.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter

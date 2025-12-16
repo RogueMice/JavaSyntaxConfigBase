@@ -1,4 +1,4 @@
-package com.Server.ManageStudent.dto;
+package com.Server.ManageStudent.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 

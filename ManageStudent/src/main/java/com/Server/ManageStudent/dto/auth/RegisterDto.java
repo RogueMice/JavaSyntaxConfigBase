@@ -1,10 +1,10 @@
-package com.Server.ManageStudent.dto;
+package com.Server.ManageStudent.dto.auth;
 
+import com.Server.ManageStudent.dto.student.StudentDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-@Data
 public class RegisterDto {
 
     @NotBlank(message = "username can not empty !")

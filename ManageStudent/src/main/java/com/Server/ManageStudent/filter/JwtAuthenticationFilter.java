@@ -29,14 +29,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             if (jwtTokenProvider.validateToken(token)) {
-                String username = jwtTokenProvider.getUsernameFromToken(token);
+                String userId = jwtTokenProvider.getUserIdFromToken(token);
                 var authorities = jwtTokenProvider.getRolesFromToken(token)
                         .stream()
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
                 UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(username, null, authorities);
+                        new UsernamePasswordAuthenticationToken(userId, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }

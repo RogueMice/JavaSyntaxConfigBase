@@ -1,4 +1,4 @@
-package com.Server.ManageStudent.repository.entity.roleDefine;
+package com.Server.ManageStudent.entity.roleDefine;
 
 public enum Role {
     ADMIN,

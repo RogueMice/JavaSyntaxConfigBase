@@ -1,9 +1,14 @@
-package com.Server.ManageStudent.dto;
+package com.Server.ManageStudent.dto.teacher;
+
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
-public class TeacherDto {
+import java.math.BigDecimal;
+
+public class TeacherRequestDto {
 
     public Long id;
 
@@ -13,12 +18,14 @@ public class TeacherDto {
 
     public  String relativePhone;
 
-    @NotBlank
+    @NotBlank(message = "teacher code is null")
     @Size(min = 1, max = 10)
     public String teacherCode;
 
-    @Size(min = 0, message = "Salary is not < 0")
-    private Double salary;
+    @NotNull(message = "salary cannot be null")
+    @PositiveOrZero(message = "salary must be >= 0")
+    public Float salary;
 
+    @NotNull(message = "user id is null")
     public Long userId;
 }

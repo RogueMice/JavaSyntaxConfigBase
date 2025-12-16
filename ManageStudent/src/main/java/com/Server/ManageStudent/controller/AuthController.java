@@ -1,8 +1,7 @@
 package com.Server.ManageStudent.controller;
 
-import com.Server.ManageStudent.common.ResponseConfig;
-import com.Server.ManageStudent.dto.LoginDto;
-import com.Server.ManageStudent.dto.UserDto;
+import com.Server.ManageStudent.dto.auth.LoginDto;
+import com.Server.ManageStudent.dto.auth.RegisterDto;
 import com.Server.ManageStudent.service.interfaces.IAuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +19,13 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @PostMapping("register")
+    public ResponseEntity<?> register(@RequestBody RegisterDto dto) {
+        return ResponseEntity.ok(authService.register(dto));
+    }
+
     @PostMapping("login")
-    public ResponseEntity<ResponseConfig<Object>> login(@RequestBody LoginDto dto) {
-        ResponseConfig<Object> user = authService.login(dto);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<?> login(@RequestBody LoginDto dto) {
+        return ResponseEntity.ok(authService.login(dto));
     }
 }

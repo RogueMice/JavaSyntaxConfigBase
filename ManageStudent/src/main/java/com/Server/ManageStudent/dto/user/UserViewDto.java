@@ -1,4 +1,7 @@
-package com.Server.ManageStudent.dto;
+package com.Server.ManageStudent.dto.user;
+
+import com.Server.ManageStudent.dto.student.StudentViewDto;
+import com.Server.ManageStudent.dto.teacher.TeacherViewDto;
 
 import java.time.LocalDateTime;
 
@@ -14,4 +17,8 @@ public class UserViewDto {
     public LocalDateTime createdAt;
 
     public LocalDateTime updatedAt;
+
+    public StudentViewDto studentViewDto;
+
+    public TeacherViewDto teacherViewDto;
 }

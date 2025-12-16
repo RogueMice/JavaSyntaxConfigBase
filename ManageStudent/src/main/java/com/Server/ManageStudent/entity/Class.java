@@ -1,4 +1,4 @@
-package com.Server.ManageStudent.repository.entity;
+package com.Server.ManageStudent.entity;
 
 public class Class {
 }

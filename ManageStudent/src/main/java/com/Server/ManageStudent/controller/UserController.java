@@ -1,17 +1,8 @@
 package com.Server.ManageStudent.controller;
-
-import com.Server.ManageStudent.common.ResponseConfig;
-import com.Server.ManageStudent.dto.LoginDto;
-import com.Server.ManageStudent.dto.UserDto;
-import com.Server.ManageStudent.service.interfaces.IAuthService;
 import com.Server.ManageStudent.service.interfaces.IUserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/user")
@@ -22,10 +13,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("addOrUpdate")
-    public ResponseEntity<ResponseConfig<UUID>> createOrUpdate(@RequestBody UserDto dto) {
-        ResponseConfig<UUID> response = userService.createOrUpdate(dto);
-        return ResponseEntity.ok(response);
+    @GetMapping("getAllUser")
+    public  ResponseEntity<?> getAllUser(@RequestParam int page, @RequestParam int size, @RequestParam String typeRole, @RequestParam String keyword) {
+        return ResponseEntity.ok(userService.getAllUsers(page, size,typeRole,keyword));
     }
 
+    @GetMapping("getUserDetailByUserId")
+    public ResponseEntity<?> getUserDetailByUserId(@RequestParam Long userId){
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
 }

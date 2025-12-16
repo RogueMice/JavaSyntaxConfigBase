@@ -1,4 +1,4 @@
-package com.Server.ManageStudent.dto;
+package com.Server.ManageStudent.dto.user;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 

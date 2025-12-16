@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -21,24 +23,19 @@ public class JwtTokenProvider {
 
     @Value("${jwt.expirationMs}")
     private long expirationMs;
-//    @Value("${jwt.secret:defaultsecretkey1234567890123456}")
-//    private String secret;
-//
-//    @Value("${jwt.expirationMs:3600000}")
-//    private long expirationMs;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     // Generate token
-    public String generateToken(String username, Enum role) {
+    public String generateToken(long id, Enum role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles","ROLE_" + role.name());
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
+                .setSubject(String.valueOf(id))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -68,9 +65,18 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    //Get userName
-    public String getUsernameFromToken(String token) {
+    //Get userId from token
+    public String getUserIdFromToken(String token) {
         return getClaims(token).getSubject();
+    }
+
+    public Long getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String userName = authentication.getName();
+            return Long.parseLong(userName);
+        }
+        return null;
     }
 
     //Get role
